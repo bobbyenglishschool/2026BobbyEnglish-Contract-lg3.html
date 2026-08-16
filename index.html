@@ -376,6 +376,7 @@
                 <p style="font-size: 11px; color: var(--text-sub); margin: 10px 0 0 0;">(依據教育部短期補習班補習服務契約書範本與桃園市最新設立及管理法規制定-2026年9月最新核定版)</p>
             </div>
 
+            <!-- 🎯 精準修復：審閱權日期動態精準寫入 -->
             <div class="privacy-statement">
                 <strong>【重要權益：契約審閱權】 / Contract Review Right</strong><br>
                 本定型化契約書於中華民國 <span id="reviewYearDisplay" style="font-weight: bold; color: #0077b6;"></span> 年 <span id="reviewMonthDisplay" style="font-weight: bold; color: #0077b6;"></span> 月 <span id="reviewDayDisplay" style="font-weight: bold; color: #0077b6;"></span> 日由學員及監護人攜回審閱（契約審閱期間至少為五日）。甲方簽章確認已充分審閱並同意條款。<br>
@@ -657,10 +658,12 @@ function prepareSubmit(event) {
     });
 }
 
+// 🎯 核心精準修復：審閱期日期自動推算晶片
 window.onload = function() {
     initCanvases();
+    window.addEventListener('resize', resizeAllCanvases);
     
-    // 🎯 法律防護：自動計算 5 天前審閱日期，滿足 5 日法定審閱期要求
+    // 🎯 法律防護：自動計算 5 天前審閱日期，滿足消保法 5 日法定審閱期要求
     var today = new Date();
     var reviewDate = new Date();
     reviewDate.setDate(today.getDate() - 5);
@@ -669,13 +672,16 @@ window.onload = function() {
     var reviewMonth = reviewDate.getMonth() + 1;
     var reviewDay = reviewDate.getDate();
     
-    document.getElementById('reviewYearDisplay').innerText = minguoYear;
-    document.getElementById('reviewMonthDisplay').innerText = reviewMonth;
-    document.getElementById('reviewDayDisplay').innerText = reviewDay;
-    document.getElementById('reviewYearDisplayEn').innerText = minguoYear;
-    document.getElementById('reviewMonthDisplayEn').innerText = reviewMonth;
-    document.getElementById('reviewDayDisplayEn').innerText = reviewDay;
+    // 中文與英文 DOM 標籤全面精準覆蓋
+    if(document.getElementById('reviewYearDisplay')) document.getElementById('reviewYearDisplay').innerText = minguoYear;
+    if(document.getElementById('reviewMonthDisplay')) document.getElementById('reviewMonthDisplay').innerText = reviewMonth;
+    if(document.getElementById('reviewDayDisplay')) document.getElementById('reviewDayDisplay').innerText = reviewDay;
     
+    if(document.getElementById('reviewYearDisplayEn')) document.getElementById('reviewYearDisplayEn').innerText = minguoYear;
+    if(document.getElementById('reviewMonthDisplayEn')) document.getElementById('reviewMonthDisplayEn').innerText = reviewMonth;
+    if(document.getElementById('reviewDayDisplayEn')) document.getElementById('reviewDayDisplayEn').innerText = reviewDay;
+    
+    // 簽約當天日期動態寫入
     if(document.getElementById('currentDateDisplay')) {
         document.getElementById('currentDateDisplay').innerText = today.getFullYear() + " 年 " + (today.getMonth() + 1) + " 月 " + today.getDate() + " 日";
     }

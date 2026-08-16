@@ -170,8 +170,8 @@
             background-color: #f0f4f8;
             padding: 14px 18px;
             border-left: 4px solid var(--uci-blue);
-            font-size: 13px;
-            margin-bottom: 20px;
+            font-size: 13.5px;
+            margin-bottom: 22px;
             border-radius: 6px;
             line-height: 1.65;
         }
@@ -181,7 +181,7 @@
             background-color: #fafbfc;
             padding: 20px;
             height: 420px; 
-            overflow-y: auto;
+            overflow-y: scroll;
             font-size: 13px;
             line-height: 1.7;
             text-align: left;
@@ -378,7 +378,7 @@
 
             <div class="privacy-statement">
                 <strong>【重要權益：契約審閱權】 / Contract Review Right</strong><br>
-                本定型化契約書於中華民國 <span id="reviewYearDisplay" style="font-weight: bold; color: var(--uci-blue);"></span> 年 <span id="reviewMonthDisplay" style="font-weight: bold; color: var(--uci-blue);"></span> 月 <span id="reviewDayDisplay" style="font-weight: bold; color: var(--uci-blue);"></span> 日由學員及監護人攜回審閱（契約審閱期間至少為五日）。甲方簽章確認已充分審閱並同意條款。<br>
+                本定型化契約書於中華民國 <span id="reviewYearDisplay" style="font-weight: bold; color: #0077b6;"></span> 年 <span id="reviewMonthDisplay" style="font-weight: bold; color: #0077b6;"></span> 月 <span id="reviewDayDisplay" style="font-weight: bold; color: #0077b6;"></span> 日由學員及監護人攜回審閱（契約審閱期間至少為五日）。甲方簽章確認已充分審閱並同意條款。<br>
                 <span style="color: var(--text-sub); font-style: italic;">This standard contract was taken home by the student/parent for review on Minguo <span id="reviewYearDisplayEn"></span>/<span id="reviewMonthDisplayEn"></span>/<span id="reviewDayDisplayEn"></span> (The contract review period shall be at least five days). Signature below confirms full review and acknowledgment.</span>
             </div>
 
@@ -483,7 +483,7 @@
                 </div>
                 <div class="legal-item">
                     <strong>第十條：違規行為處置、秩序維護與契約終止 / Article 10: Student Conduct, Classroom Order, and Termination：</strong><br>
-                    1. 學員於修業期間應共同維護課堂秩序與安全。若有嚴重干擾他人學習、惡意破壞公共設施、侵害違法行為且屢勸不聽者，為維護全班學員安全防線，乙方得單方面終止本契約，並依第六條退費條款辦理剩餘款項退費手續。<br>
+                    學員於修業期間應共同維護課堂秩序與安全。若有嚴重干擾他人學習、惡意破壞公共設施、侵害違法行為且屢勸不聽者，為維護全班學員安全防線，乙方得單方面終止本契約，並依第六條退費條款辦理剩餘款項退費手續。<br>
                     <span class="legal-en">Students must strictly maintain classroom order and safety. For severe disruptions endangering others or malicious vandalism where repeated counseling fails, Party B reserves the right to unilaterally terminate this contract, issuing refunds according to Article 6.</span>
                 </div>
                 <div class="legal-item">
@@ -555,7 +555,7 @@ function initCanvases() {
     parentCtx.strokeStyle = "#1b3d6d";
     
     setupCanvas(staffCanvas, staffCtx);
-    staffCtx.strokeStyle = "#1b3d6d";
+    staffCtx.strokeStyle = "#0077b6";
 }
 
 function getPos(canvas, e) {
@@ -597,9 +597,9 @@ function clearSig(target) {
 
 function calculateContractBilling() {
     var discountRatio = parseFloat(document.getElementById('discountSelector').value);
-    var originalTuition = 31620; // Let's Go 3 專屬學費 ($620 x 51堂)
-    var materialsFee = 1572;    // Let's Go 3 專屬講義教材費
-    var schoolMiscFee = 3060;   // Let's Go 3 專屬學雜費 ($60 x 51堂)
+    var originalTuition = 31620;
+    var materialsFee = 1572; 
+    var schoolMiscFee = 3060;
     
     var finalTuition = Math.round(originalTuition * discountRatio);
     var grandTotal = finalTuition + materialsFee + schoolMiscFee;

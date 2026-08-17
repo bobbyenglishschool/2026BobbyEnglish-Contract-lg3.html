@@ -358,7 +358,7 @@
 <div class="page-container">
     <form id="contractForm" action="https://formsubmit.co/joy@bobbyenglishschool.com" method="POST" onsubmit="prepareSubmit(event)">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" id="formSubject" name="_subject" value="【法律合約書回傳】Let's Go 3 兒童美語中級班">
+        <input type="hidden" id="formSubject" name="_subject" value="【法律合約書回傳】Let's Go 3 兒童美語中級">
         
         <input type="hidden" id="signature_parent_base64" name="[家長親筆手寫電子簽章區]">
         <input type="hidden" id="signature_staff_base64" name="[補習班行政核定電子簽章區]">
@@ -371,7 +371,7 @@
         <div class="page">
             <div class="contract-header">
                 <h1>私立巴比美語短期補習班 ｜ 短期補習服務報名表暨服務契約書</h1>
-                <h2>Let's Go 3 兒童美語中級班</h2>
+                <h2>Let's Go 3 兒童美語中級</h2>
                 <h2 style="font-size: 13.5px; font-weight: 700; margin-top: 5px; opacity: 0.95;">Bobby English School - Enrollment Form & Service Contract</h2>
                 <p style="font-size: 11px; color: var(--text-sub); margin: 10px 0 0 0;">(依據教育部短期補習班補習服務契約書範本與桃園市最新設立及管理法規制定-2026年9月最新核定版)</p>
             </div>
@@ -389,9 +389,9 @@
                     <tbody>
                         <tr>
                             <th><span class="zh-title">選讀核定班別</span><span class="en-title">Enrolled Course</span></th>
-                            <!-- 🎯 精準修改：班別拆分為兩行，且上下左右 100% 幾何精準置中 -->
-                            <td style="font-weight: bold; color: var(--uci-blue); font-size: 13.5px; text-align: center; vertical-align: middle; line-height: 1.4;">
-                                Let's Go 3<br>兒童美語中級班
+                            <!-- 🎯 精準規範：第一區表格欄位文字拆為兩行，刪除贅字「班」，100% 幾何精準置中！ -->
+                            <td style="font-weight: bold; color: var(--uci-blue); font-size: 13.5px; text-align: center; vertical-align: middle; line-height: 1.4; padding: 6px;">
+                                Let's Go 3<br>兒童美語中級
                             </td>
                             <th><span class="zh-title">核定收費方案選擇</span><span class="en-title">Tuition Plan Option</span></th>
                             <td>
@@ -399,8 +399,8 @@
                                     <option value="1">標準常規原價方案 / Standard Plan ($36,252)</option>
                                     <option value="0.9">9折優惠方案 / 10% Off Promotion</option>
                                     <option value="0.85">85折優惠方案 / 15% Off Promotion</option>
-                                    <!-- 🎯 已刪除「老朋友」字樣，保留「8折優惠方案」 -->
-                                    <option value="0.8">8折優惠方案 / 20% Off Promotion</option>
+                                    <!-- 🎯 已刪除「老朋友」字樣，統一顯示為「✨ 8 折優惠方案」 -->
+                                    <option value="0.8">✨ 8 折優惠方案 / 20% Off Promotion</option>
                                 </select>
                             </td>
                         </tr>
@@ -429,7 +429,7 @@
                 </div>
                 <div class="legal-item">
                     <strong>第一條：修業班別與班級性質 / Article 1: Course and Program Enrollment Type：</strong><br>
-                    1. 本契約核定就讀班級為：Let's Go 3 兒童美語中級班。<br>
+                    1. 本契約核定就讀班級為：Let's Go 3 兒童美語中級。<br>
                     2. 本課程屬一般系統化正規美語教學進度班，非屬保證班（補習班未提供任何特定考取、分數擔保、退費退分等特定保證成效承諾）。<br>
                     <span class="legal-en">1. The approved program under this contract is: Let's Go 3 Children's English Intermediate Class.<br>2. This course is a regular systematic progression program and is NOT a "guaranteed success" or "warranty" program (No promises of passing specific exams or special (effectiveness or outcome) guarantee warranties shall apply).</span>
                 </div>
@@ -601,8 +601,9 @@ function clearSig(target) {
 }
 
 // =========================================================================
-// 🎯 核心修正：遵守最高協定全項目連動算式：
+// 🎯 核心升級：遵守最高協定全項目連動算式：
 // 【應繳總金額 = Math.round((基本學費 + 原價教材費 + 當期學雜費) * 折扣率)】
+// 並且同步連動第五條內文總金額（legal_total_zh）！
 // =========================================================================
 function calculateContractBilling() {
     var discountRatio = parseFloat(document.getElementById('discountSelector').value);
@@ -611,8 +612,8 @@ function calculateContractBilling() {
     var pricePerLesson = 620;
     var lessons = 51;
     var baseTuition = pricePerLesson * lessons; // $31,620
-    var rawMaterials = 1572;                   // $1,572
-    var rawMisc = 60 * lessons;                // $3,060
+    var rawMaterials = 1572;                    // $1,572
+    var rawMisc = 60 * lessons;                 // $3,060
     
     // 全項目未折總計 = 31,620 + 1,572 + 3,060 = 36,252
     var subTotal = baseTuition + rawMaterials + rawMisc;
@@ -626,8 +627,10 @@ function calculateContractBilling() {
     document.getElementById('td_misc').innerText = "NT$ " + rawMisc.toLocaleString() + " 元";
     document.getElementById('td_total').innerText = "NT$ " + grandTotal.toLocaleString() + " 元";
     
-    // 🎯 法律條款第五條動態連動更新！
-    document.getElementById('legal_total_zh').innerText = grandTotal.toLocaleString();
+    // 🎯 法律條款第五條動態連動即時更新！
+    if (document.getElementById('legal_total_zh')) {
+        document.getElementById('legal_total_zh').innerText = grandTotal.toLocaleString();
+    }
 
     // 備份死數據至 Form 隱藏欄位
     document.getElementById('hidden_tuition').value = baseTuition + " 元";
@@ -641,7 +644,7 @@ function calculateContractBilling() {
     if (discountRatio === 0.85) discountText = "享 85 折特惠";
     if (discountRatio === 0.8) discountText = "享 8 折特惠";
 
-    document.getElementById('formSubject').value = "【法律合約完成-" + discountText + "】Let's Go 3 兒童美語中級班";
+    document.getElementById('formSubject').value = "【法律合約完成-" + discountText + "】Let's Go 3 兒童美語中級";
 }
 
 function prepareSubmit(event) {
